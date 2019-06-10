@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.demo.dao.ArtworkDao">
+
+    <resultMap id="artworkDOMap" type="com.springboot.demo.model.ArtworkDO">
+        <id column="id" property="id" />
+        <result column="length" property="length"/>
+        <result column="annotation" property="annotation"/>
+        <result column="location" property="location"/>
+        <result column="signature" property="signature"/>
+        <result column="size" property="size"/>
+        <result column="sid" property="sid"/>
+        <result column="title" property="title"/>
+        <result column="title_en" property="titleEn"/>
+        <result column="desc" property="desc"/>
+        <result column="artist_unique_id" property="artistUniqueId"/>
+        <result column="artist_id" property="artistId"/>
+        <result column="artist_name" property="artistName"/>
+        <result column="artist_intro" property="artistIntro"/>
+        <result column="width" property="width"/>
+        <result column="pixel_width" property="pixelWidth"/>
+        <result column="pixel_height" property="pixelHeight"/>
+        <result column="mounted_width" property="mountedWidth"/>
+        <result column="mounted_height" property="mountedHeight"/>
+        <result column="framed_width" property="framedWidth"/>
+        <result column="framed_height" property="framedHeight"/>
+        <result column="dynasty" property="dynasty"/>
+        <result column="date_str" property="dateStr"/>
+        <result column="date_str_en" property="dateStrEn"/>
+        <result column="filename" property="filename"/>
+        <result column="material" property="material"/>
+        <result column="material_en" property="materialEn"/>
+        <result column="location_en" property="locationEn"/>
+        <result column="shape" property="shape"/>
+        <result column="url" property="url"/>
+        <result column="h_url" property="hUrl"/>
+        <result column="fileurl" property="fileurl"/>
+        <result column="m_url" property="mUrl"/>
+        <result column="s_url" property="sUrl"/>
+        <result column="cat_id" property="catId"/>
+        <result column="cat_parent_id" property="catParentId"/>
+        <result column="aicat_id" property="aicatId"/>
+        <result column="cat_in_org_id" property="catInOrgId"/>
+        <result column="cat1_in_org" property="cat1InOrg"/>
+        <result column="cat2_in_org" property="cat2InOrg"/>
+        <result column="status" property="status"/>
+        <result column="stamps" property="stamps"/>
+        <result column="remark" property="remark"/>
+        <result column="owner_id" property="ownerId"/>
+        <result column="org_id" property="orgId"/>
+        <result column="is_collect" property="isCollect"/>
+        <result column="audio_url" property="audioUrl"/>
+        <result column="audio_click_count" property="audioClickCount"/>
+        <result column="audio_duration" property="audioDuration"/>
+        <result column="audio_author" property="audioAuthor"/>
+        <result column="audio_desc" property="audioDesc"/>
+        <result column="audio_guide_code" property="audioGuideCode"/>
+        <result column="video_url" property="videoUrl"/>
+        <result column="video_click_count" property="videoClickCount"/>
+        <result column="video_duration" property="videoDuration"/>
+        <result column="video_author" property="videoAuthor"/>
+        <result column="video_desc" property="videoDesc"/>
+        <result column="auction" property="auction"/>
+        <result column="exhibit" property="exhibit"/>
+        <result column="is_auction" property="isAuction"/>
+        <result column="publish_state" property="publishState"/>
+        <result column="origin" property="origin"/>
+        <result column="unearth_info" property="unearthInfo"/>
+        <result column="security_level" property="securityLevel"/>
+        <result column="security_description" property="securityDescription"/>
+        <result column="cultural_relic_level" property="culturalRelicLevel"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="similar_artwork_id" property="similarArtworkId"/>
+        <result column="inscription" property="inscription"/>
+        <result column="label" property="label"/>
+        <result column="data_source" property="dataSource"/>
+        <result column="data_unique_code" property="dataUniqueCode"/>
+        <result column="det_url" property="detUrl"/>
+        <result column="all_info" property="allInfo"/>
+        <result column="has_water" property="hasWater"/>
+        <result column="editor" property="editor"/>
+        <result column="editor_time" property="editorTime"/>
+        <result column="uucat_id" property="uucatId"/>
+        <result column="weight" property="weight"/>
+        <result column="real_quantity" property="realQuantity"/>
+        <result column="integrity_degree" property="integrityDegree"/>
+        <result column="collect_time_str" property="collectTimeStr"/>
+        <result column="audit_state" property="auditState"/>
+        <result column="theme" property="theme"/>
+        <result column="skill" property="skill"/>
+        <result column="title_tag" property="titleTag"/>
+        <result column="writing" property="writing"/>
+        <result column="quote" property="quote"/>
+        <result column="classify_type" property="classifyType"/>
+        <result column="gmt_publish" property="gmtPublish"/>
+        <result column="banner_flag" property="bannerFlag"/>
+        <result column="image_supplement" property="imageSupplement"/>
+        <result column="click_count" property="clickCount"/>
+        <result column="date" property="date"/>
+    </resultMap>
+    <select id="getById" resultMap="artworkDOMap">
+        select * from artwork where id = #{id}
+    </select>
+
+</mapper>
