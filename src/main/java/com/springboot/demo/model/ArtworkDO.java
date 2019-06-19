@@ -1,5 +1,8 @@
 package com.springboot.demo.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -8,8 +11,10 @@ import java.util.Objects;
  * @desc
  * @time 2019-06-06 16:24
  */
+@Document
 public class ArtworkDO {
 
+    @Id
     private Integer id;
     private String sid;
     private String title;

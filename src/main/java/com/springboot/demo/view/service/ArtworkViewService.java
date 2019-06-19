@@ -5,6 +5,7 @@ import com.springboot.demo.service.ArtworkService;
 import com.springboot.demo.view.vo.ArtworkVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,8 @@ public class ArtworkViewService {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     public ArtworkVO getById(Integer id) {
         String cacheKey = "APP.Test.ArtworkDO-Id:" + id;
@@ -47,6 +50,7 @@ public class ArtworkViewService {
         if (artworkDO == null) {
             return null;
         }
+        mongoTemplate.save(artworkDO);
         ArtworkVO artworkVO = new ArtworkVO();
         BeanUtils.copyProperties(artworkDO, artworkVO);
         return artworkVO;

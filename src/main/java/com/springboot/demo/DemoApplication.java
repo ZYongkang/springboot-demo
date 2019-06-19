@@ -1,12 +1,12 @@
 package com.springboot.demo;
 
+import com.spring4all.mongodb.EnableMongoPlus;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@EnableMongoPlus
 @SpringBootApplication
-@EnableAutoConfiguration
 @MapperScan("com.springboot.demo.dao")
 public class DemoApplication {
 
