@@ -15,11 +15,11 @@ public class MongoService {
     @Autowired
     private MongoDao mongoDao;
 
-    public void save(Object object) {
-        if (object != null) {
-            Object save = mongoDao.save(object);
-            System.out.println(save);
+    public Object save(Object object) {
+        if (object == null) {
+            return null;
         }
+        return mongoDao.save(object);
     }
 
 }

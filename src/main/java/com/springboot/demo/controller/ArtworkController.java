@@ -4,6 +4,7 @@ import com.springboot.demo.model.ArtworkDO;
 import com.springboot.demo.service.ArtworkService;
 import com.springboot.demo.view.service.ArtworkViewService;
 import com.springboot.demo.view.vo.ArtworkVO;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -41,7 +42,6 @@ public class ArtworkController {
     @ResponseBody
     public Map<String, Object> getArtWorkDOById(@RequestParam(name = "id") Integer id) {
         Map<String, Object> modelMap = new HashMap<>();
-        log.info("url:'/demo/artwork/get_by_id';param:id="+id);
         if (id == null || id <= 0) {
             modelMap.put("status", 2);
             modelMap.put("msg", "id is null or id <= 0");
@@ -55,19 +55,43 @@ public class ArtworkController {
                 modelMap.put("msg", "no data");
                 return modelMap;
             }
-            String sid = artworkVO.getSid();
-            Query query = new Query();
-            query.addCriteria(Criteria.where("sid").is(sid));
-            ArtworkDO artworkDO = mongoTemplate.findOne(query, ArtworkDO.class);
-            if (artworkDO != null) {
-                System.out.println(artworkDO.toString());
-            }
             modelMap.put("status", 0);
             modelMap.put("msg", "success");
             modelMap.put("data", artworkVO.toJSON());
             return modelMap;
         } catch (Exception e) {
             e.printStackTrace();
+            modelMap.put("status", -1);
+            modelMap.put("msg", "error" + e.getMessage());
+            return modelMap;
+        }
+    }
+
+    @RequestMapping(value = "/get_by_sid", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> getArtworkDOBySid(@RequestParam(name = "sid") String sid,
+                                                 @RequestParam(name = "version", required = false, defaultValue = "") String version) {
+        Map<String, Object> modelMap = new HashMap<>();
+        if (sid == null || sid.isEmpty()) {
+            modelMap.put("status", 2);
+            modelMap.put("msg", "id is null or id <= 0");
+            return modelMap;
+        }
+        try {
+            ArtworkVO artworkVO = artworkViewService.getBySid(sid);
+            if (artworkVO == null) {
+                modelMap.put("status", -1);
+                modelMap.put("msg", "no data");
+                return modelMap;
+            }
+            modelMap.put("status", 0);
+            modelMap.put("msg", "success");
+            modelMap.put("data", artworkVO.toJSON());
+            return modelMap;
+        } catch (Exception e) {
+            if (log.isDebugEnabled()) {
+                log.debug("error:{}", e);
+            }
             modelMap.put("status", -1);
             modelMap.put("msg", "error" + e.getMessage());
             return modelMap;

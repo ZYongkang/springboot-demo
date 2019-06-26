@@ -1,8 +1,10 @@
 package com.springboot.demo.model;
 
+import org.apache.ibatis.javassist.SerialVersionUID;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,7 +14,9 @@ import java.util.Objects;
  * @time 2019-06-06 16:24
  */
 @Document
-public class ArtworkDO {
+public class ArtworkDO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     private Integer id;
@@ -111,9 +115,9 @@ public class ArtworkDO {
     private Integer imageSupplement;
     private Integer clickCount;
 
-    public ArtworkDO(Integer id) {
-
+    public ArtworkDO() {
     }
+
 
     public Integer getId() {
         return id;

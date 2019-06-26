@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableMongoPlus
 @SpringBootApplication
-@MapperScan("com.springboot.demo.dao")
+//@MapperScan("com.springboot.demo.dao")
 public class DemoApplication {
 
 	public static void main(String[] args) {

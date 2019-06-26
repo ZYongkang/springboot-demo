@@ -22,4 +22,8 @@ public class ArtworkService {
         }
         return artworkDao.getById(id);
     }
+
+    public ArtworkDO getBySid(String sid) {
+        return artworkDao.getBySid(sid);
+    }
 }
