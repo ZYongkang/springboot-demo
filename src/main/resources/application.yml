@@ -1,0 +1,89 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8671/eureka/
+logging:
+  config: classpath:log4j2-dev.xml
+microservice-user:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.springboot.demo.model
+server:
+  port: 8082
+  servlet:
+    context-path: /demo
+spring:
+  application:
+    name: demo
+  data:
+    mongodb:
+      option:
+        always-use-m-beans: false
+        connect-timeout: 10000
+        heartbeat-connect-timeout: 20000
+        heartbeat-frequency: 10000
+        heartbeat-socket-timeout: 20000
+        local-threshold: 15
+        max-connection-idle-time: 0
+        max-connection-life-time: 0
+        max-connection-per-host: 100
+        max-wait-time: 120000
+        min-connection-per-host: 0
+        min-heartbeat-frequency: 500
+        server-selection-timeout: 30000
+        socket-keep-alive: false
+        socket-timeout: 0
+        ssl-enabled: false
+        ssl-invalid-host-name-allowed: false
+        threads-allowed-to-block-for-connection-multiplier: 5
+      uri: mongodb://localhost:27017/test
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      async-close-connection-enable: true
+      filter:
+        stat:
+          enabled: true
+      initial-size: 2
+      max-active: 30
+      max-pool-prepared-statement-per-connection-size: 5
+      max-wait: 1234
+      min-evictable-idle-time-millis: 30001
+      min-idle: 2
+      pool-prepared-statements: true
+      stat-view-servlet:
+        enabled: true
+      test-on-borrow: true
+      test-on-return: true
+      test-while-idle: true
+      time-between-eviction-runs-millis: 10000
+      validation-query: select 1
+      validation-query-timeout: 1
+      web-stat-filter:
+        enabled: true
+    password: ArtYifuTest@2018
+    url: jdbc:mysql://dev.artspring.com.cn:3366/yifu_aw?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useServerPrepStmts=false&useAffectedRows=true&autoReconnect=true&cachePrepStmts=true&useSSL=false
+    username: yifu_test
+  redis:
+    database: 5
+    host: dev.artspring.com.cn
+    lettuce:
+      pool:
+        max-active: 256
+        max-idle: 256
+        max-wait: 300
+        min-idle: 128
+    password: deV11.21
+    port: 6479
+    timeout: 20000
+
+feign:
+  hystrix:
+    enabled: true
+
+user:
+  id: 0
+  sid: XXX
+  nickname: test

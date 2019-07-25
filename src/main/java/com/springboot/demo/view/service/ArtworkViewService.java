@@ -1,12 +1,14 @@
 package com.springboot.demo.view.service;
 
 import com.springboot.demo.model.ArtworkDO;
+import com.springboot.demo.model.MicroBeanObject;
+import com.springboot.demo.model.UserDO;
 import com.springboot.demo.service.ArtworkService;
+import com.springboot.demo.service.UserFeignService;
 import com.springboot.demo.view.vo.ArtworkVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,10 @@ public class ArtworkViewService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    public ArtworkVO getById(Integer id) {
+    @Autowired
+    private UserFeignService userFeignService;
+
+    public ArtworkVO getById(Integer id, Integer userId) {
         String cacheKey = "APP.Test.ArtworkDO-Id:" + id;
         if (id == null || id <= 0) {
             return null;
@@ -38,6 +43,19 @@ public class ArtworkViewService {
         } else {
             artworkDO = artworkService.getById(id);
             redisTemplate.opsForValue().set(cacheKey, artworkDO, 10, TimeUnit.MINUTES);
+        }
+
+        MicroBeanObject<UserDO> microBeanObject = userFeignService.getById(userId);
+
+        UserDO userDO = null;
+        if (microBeanObject != null) {
+            Integer status = microBeanObject.getStatus();
+            if (status == 0) {
+                userDO = (UserDO) microBeanObject.covert2Object(UserDO.class);
+            }
+        }
+        if (userDO != null) {
+            System.out.println(userDO);
         }
         if (artworkDO == null) {
             return null;

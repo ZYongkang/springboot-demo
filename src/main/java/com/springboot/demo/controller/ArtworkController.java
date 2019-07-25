@@ -1,15 +1,9 @@
 package com.springboot.demo.controller;
 
-import com.springboot.demo.model.ArtworkDO;
-import com.springboot.demo.service.ArtworkService;
 import com.springboot.demo.view.service.ArtworkViewService;
 import com.springboot.demo.view.vo.ArtworkVO;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,17 +24,14 @@ import java.util.Map;
 public class ArtworkController {
 
     @Autowired
-    private ArtworkService artworkService;
-
-    @Autowired
     private ArtworkViewService artworkViewService;
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
 
     @RequestMapping(value = "/get_by_id", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> getArtWorkDOById(@RequestParam(name = "id") Integer id) {
+    public Map<String, Object> getArtWorkDOById(@RequestParam(name = "id") Integer id,
+                                                @RequestParam(name = "user_id", required = false, defaultValue = "1") Integer userId) {
+
         Map<String, Object> modelMap = new HashMap<>();
         if (id == null || id <= 0) {
             modelMap.put("status", 2);
@@ -48,7 +39,7 @@ public class ArtworkController {
             return modelMap;
         }
         try {
-            ArtworkVO artworkVO = artworkViewService.getById(id);
+            ArtworkVO artworkVO = artworkViewService.getById(id,userId);
             if (artworkVO == null) {
                 modelMap.put("data", null);
                 modelMap.put("status", -1);
